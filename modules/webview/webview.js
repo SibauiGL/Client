@@ -1,4 +1,5 @@
 import interfaces from "./interfaces";
+import xmenu from "../xmenu/xmenu"
 
 class WebView {
     constructor() {
@@ -74,6 +75,10 @@ class WebView {
 
         mp.events.add("SetRotation", rot => {
             mp.players.local.setHeading(parseInt(rot));
+        })
+
+        mp.events.add("XMenuSelected", (item) => {
+            xmenu.onItemSelected(JSON.parse(item))
         })
 
         /* just temporary, for login */

@@ -2,6 +2,7 @@ import webview from "../webview/webview";
 
 class Player {
     constructor() {
+        this.loaded = false;
         this.name = "";
         this.team = 1;
         this.isCuffed = false;
@@ -16,6 +17,8 @@ class Player {
 
         mp.events.add("PlayerLoaded", (_player) => {
             var player = JSON.parse(_player);
+
+            this.loaded = true;
 
             webview.updateView("SetMoney", [player.m]);
             webview.updateView("HidePlayerHud", [false]);

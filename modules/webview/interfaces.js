@@ -10,8 +10,6 @@ class Interfaces {
     }
 
     isOpen(interfaceName) {
-        mp.events.call("AddNotify", "Open Menu " + interfaceName, "#c72020")
-
         return this.openInterface == interfaceName
     }
 

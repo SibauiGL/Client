@@ -1,11 +1,11 @@
-const gulp       = require('gulp')
+const gulp = require('gulp')
 const browserify = require('browserify')
-const babelify   = require('babelify')
-// const uglify     = require('gulp-uglify-es').default
-const source     = require('vinyl-source-stream')
-// const buffer     = require('vinyl-buffer')
+const babelify = require('babelify')
+    // const uglify     = require('gulp-uglify-es').default
+const source = require('vinyl-source-stream')
+    // const buffer     = require('vinyl-buffer')
 
-gulp.task('build', function () {
+gulp.task('build', function() {
     return browserify()
         .add('index.js')
         .transform(babelify, {
@@ -21,16 +21,16 @@ gulp.task('build', function () {
             ],
         })
         .bundle()
-        .on('error', function (error) {
+        .on('error', function(error) {
             console.error(error.toString())
         })
         .pipe(source('client.js'))
         //.pipe(buffer())
         //.pipe(uglify()) 
-        .pipe(gulp.dest('./dist'))
+        .pipe(gulp.dest('C:/RAGEMP/server-files/client_packages/sibaui/api'))
 })
 
-gulp.task('watch', gulp.parallel('build'), function () {
+gulp.task('watch', gulp.parallel('build'), function() {
     return gulp.watch('./modules/**/*.js', gulp.parallel('build'))
 })
 
