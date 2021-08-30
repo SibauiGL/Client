@@ -28,6 +28,37 @@ class Player {
             this.appearance = JSON.parse(appearanceData);
             this.setAppearance();
         });
+
+        mp.events.add("StartEffect", (effectName, duration, looped) => {
+            mp.game.graphics.startScreenEffect(effectName, duration, looped);
+        });
+
+        mp.events.add("StopEffect", (effectName) => {
+            mp.game.graphics.stopScreenEffect(effectName);
+        });
+
+        mp.events.add("SetInjured", injured => {
+            this.isInjured = injured;
+        });
+
+        mp.events.add("render", () => {
+            if (this.isInjured) {
+                this.disableControls()
+                mp.game.controls.disableControlAction(0, 30, true) //Move LR
+                mp.game.controls.disableControlAction(0, 31, true) //Move UD
+            }
+        })
+    }
+
+    disableControls() {
+        mp.game.player.disableFiring(true)
+        mp.game.controls.disableControlAction(0, 22, true) //Space
+        mp.game.controls.disableControlAction(0, 23, true) //Veh Enter
+        mp.game.controls.disableControlAction(0, 25, true) //Right Mouse
+        mp.game.controls.disableControlAction(0, 44, true) //Q
+        mp.game.controls.disableControlAction(2, 75, true) //Exit Vehicle
+        mp.game.controls.disableControlAction(2, 140, true) //R
+        mp.game.controls.disableControlAction(2, 141, true) //Left Mouse
     }
 
     setAppearance(reset = false) {
