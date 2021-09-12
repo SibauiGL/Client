@@ -19,7 +19,9 @@ class WebView {
         mp.events.add('ShowIF', (...args) => {
             mp.gui.chat.push(`ShowIF ${args[0]} (${JSON.stringify(args)})`);
             mp.gui.cursor.show(true, true);
+
             this.mainView.call("ShowIF", args);
+            interfaces.open(args[0]);
         });
 
         mp.events.add('CloseIF', () => {
@@ -33,6 +35,7 @@ class WebView {
 
         mp.events.add("HideInterface", () => {
             mp.gui.cursor.show(false, false);
+            interfaces.hide();
         });
 
         mp.events.add("HidePlayerHud", (bool) => {
